@@ -10,7 +10,7 @@ def root():
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
 
-    return current_app.send_static_file("index.html")
+    return current_app.send_static_file("index_new.html")
 
 
 #192.168.1.135
