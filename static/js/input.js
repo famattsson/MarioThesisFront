@@ -6,19 +6,15 @@
         var key;
 
         switch(code) {
-        case 32:
-            key = 'SPACE'; break;
-        case 65:
+        case LEFT_KEY:
             key = 'LEFT'; break;
-        case 69:
-            key = 'UP'; break;
-        case 68:
+        case RIGHT_KEY:
             key = 'RIGHT'; break;
-        case 83:
+        case DOWN_KEY:
             key = 'DOWN'; break;
-        case 87:
+        case JUMP_KEY:
             key = 'JUMP'; break;
-        case 16:
+        case RUN_KEY:
             key = 'RUN'; break;
         default:
             key = String.fromCharCode(code);

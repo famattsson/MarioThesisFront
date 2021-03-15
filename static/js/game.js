@@ -28,6 +28,12 @@ canvas.height = 720;
 ctx.scale(3,3);
 document.body.appendChild(canvas);
 
+var JUMP_KEY = 87
+var LEFT_KEY = 65
+var RIGHT_KEY = 68
+var DOWN_KEY = 83
+var RUN_KEY = 16
+
 //viewport
 var vX = 0,
     vY = 0,

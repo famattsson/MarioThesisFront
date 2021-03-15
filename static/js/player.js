@@ -362,13 +362,13 @@
 			this.die();
 		} else { //otherwise, you get turned into small mario
 			sounds.pipe.play();
+			this.power = 0;
 			this.powering = [0,5,1,5,2,5,1,5,2,5,1,5,2,5,1,5,2,5,1,5,2,5,3];
 			this.shift = [0,16,-16,16];
 			this.sprite.pos = [160, 0];
 			this.powerSprites = [[160,0], [240, 32], [240, 0], [160, 32]];
 			this.powerSizes = [[16, 32], [16,16], [16,32], [16,16]];
 			this.invincibility = 120;
-			this.power = 0;
 			this.hitbox = [0,0,16,16];
 		}
 	};
