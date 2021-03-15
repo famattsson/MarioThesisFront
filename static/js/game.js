@@ -92,7 +92,7 @@ function processQualityForm(e) {
       redirect: 'follow'
     };
 
-    fetch("https://mario-thesis.ew.r.appspot.com/ratings", requestOptions)
+    fetch("http://81.234.117.70:14544/ratings", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -162,7 +162,7 @@ function processBackgroundForm(e) {
       redirect: 'follow'
     };
 
-    fetch("https://mario-thesis.ew.r.appspot.com/players", requestOptions)
+    fetch("http://81.234.117.70:14544/players", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -272,7 +272,7 @@ function init() {
       redirect: 'follow'
     };
 
-    fetch("https://mario-thesis.ew.r.appspot.com/players", requestOptions)
+    fetch("http://81.234.117.70:14544/players", requestOptions)
         .then(response => response.text())
         .then(result => {if(!checkPlayer(result)) {initPlayer()}})
         .catch(error => console.log('error', error));

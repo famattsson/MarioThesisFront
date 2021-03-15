@@ -197,7 +197,7 @@ var nextlevel = Mario.nextlevel = function() {
         redirect: 'follow'
     };
 
-    fetch("https://mario-thesis.ew.r.appspot.com/levels", requestOptions)
+    fetch("http://81.234.117.70:14544/levels", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
