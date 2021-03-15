@@ -216,7 +216,7 @@
 		}
 
 		if (this.invincibility) {
-			this.invincibility -= Math.round(dt * 60);
+			this.invincibility = Math.max(this.invincibility - Math.round(dt * 60),0);
 		}
 
 		if (this.waiting) {
