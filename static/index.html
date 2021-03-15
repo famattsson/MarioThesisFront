@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- The actual resolution of the NES is 256x240.
+         Ideally, we draw in this size and scale appropriately.-->
+    <title>Super Mario Bros</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../static/css/game.css">
+  </head>
+  <body style="background-color: rgb(32,35,36)">
+    <div class="controls">
+      <p id = "CurrentLevelInfo"></p>
+    </div>
+    <script type="text/javascript" src="../static/js/levels/levelsJson.js"></script>
+    <script type="text/javascript" src="../static/js/util.js"></script>
+    <script type="text/javascript" src="../static/js/input.js"></script>
+    <script type="text/javascript" src="../static/js/resources.js"></script>
+    <script type="text/javascript" src="../static/js/sprite.js"></script>
+    <script type="text/javascript" src="../static/js/entity.js"></script>
+    <script type="text/javascript" src="../static/js/pipe.js"></script>
+    <script type="text/javascript" src="../static/js/mushroom.js"></script>
+    <script type="text/javascript" src="../static/js/fireflower.js"></script>
+    <script type="text/javascript" src="../static/js/star.js"></script>
+    <script type="text/javascript" src="../static/js/fireball.js"></script>
+    <script type="text/javascript" src="../static/js/coin.js"></script>
+    <script type="text/javascript" src="../static/js/bcoin.js"></script>
+    <script type="text/javascript" src="../static/js/goomba.js"></script>
+    <script type="text/javascript" src="../static/js/koopa.js"></script>
+    <script type="text/javascript" src="../static/js/floor.js"></script>
+    <script type="text/javascript" src="../static/js/block.js"></script>
+    <script type="text/javascript" src="../static/js/rubble.js"></script>
+    <script type="text/javascript" src="../static/js/prop.js"></script>
+    <script type="text/javascript" src="../static/js/player.js"></script>
+    <script type="text/javascript" src="../static/js/flag.js"></script>
+    <script type="text/javascript" src="../static/js/levels/level.js"></script>
+    <script type="text/javascript" src="../static/js/levels/levelparser.js"></script>
+    <script type="text/javascript" src="../static/js/game.js"></script>
+    <div class="controls" style="align-content: center; text-align: center;">
+      <h2> Controls </h2>
+      <p class="controls">Move Left: A, Move Right: D, Jump: W, Run: Shift (hold)</p>
+    </div>
+    <div id="EndDiv" class="fadeMe" style="text-align: center">
+      <h1> Thank you for participating! </h1>
+      <p> You have completed all the levels included within this study. You can now safely exit the website. If you return, you will not be able to play any more levels, this is to avoid duplicate data. </p>
+    </div>
+    <div id="BackgroundFormDiv" class="fadeMe">
+      <h1 class="likert-header">Hello! Before you start, we would like some background information. Please note that no identifying data will be stored.</h1>
+      <form id="BackgroundForm" action="">
+        <label for="Age" class="statement"> Age </label>
+        <input type="number" id="Age" name="Age" style="margin-left: 9%; margin-top: 1%; font-size: 20px">
+        <label for="Gender" class="statement"> Gender </label>
+        <ul id="Gender" class='likert'>
+          <li>
+            <input type="radio" name="Gender" value="Woman">
+            <label>Woman</label>
+          </li>
+          <li>
+            <input type="radio" name="Gender" value="Man">
+            <label>Man</label>
+          </li>
+          <li>
+            <input type="radio" name="Gender" value="Other">
+            <label>Other</label>
+          </li>
+        </ul>
+        <label for="GamingExperience" class="statement"> Amount of experience playing games </label>
+        <ul id="GamingExperience" class='likert'>
+          <li>
+            <input type="radio" name="GamingExperience" value="None">
+            <label>None</label>
+          </li>
+          <li>
+            <input type="radio" name="GamingExperience" value="Some">
+            <label>Some</label>
+          </li>
+          <li>
+            <input type="radio" name="GamingExperience" value="Moderate">
+            <label>Moderate</label>
+          </li>
+          <li>
+            <input type="radio" name="GamingExperience" value="Much">
+            <label>Much</label>
+          </li>
+          <li>
+            <input type="radio" name="GamingExperience" value="Very much">
+            <label>Very much</label>
+          </li>
+        </ul>
+        <div class="buttons">
+          <button class="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div id="QualityFormDiv" class="fadeMe">
+      <h1 class="likert-header">Good job! Please rate the level according to the criteria below.</h1>
+      <form id="QualityForm" action="">
+        <label for="Enjoyment" class="statement"> Enjoyment </label>
+        <ul id="Enjoyment" class='likert'>
+          <li>
+            <input type="radio" name="Enjoyment" value="Very Low">
+            <label>Very Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Enjoyment" value="Low">
+            <label>Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Enjoyment" value="Moderate">
+            <label>Moderate</label>
+          </li>
+          <li>
+            <input type="radio" name="Enjoyment" value="High">
+            <label>High</label>
+          </li>
+          <li>
+            <input type="radio" name="Enjoyment" value="Very High">
+            <label>Very High</label>
+          </li>
+        </ul>
+        <label for="Aesthetics" class="statement"> Aesthetics </label>
+        <ul id="Aesthetics" class='likert'>
+          <li>
+            <input type="radio" name="Aesthetics" value="Very Low">
+            <label>Very Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Aesthetics" value="Low">
+            <label>Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Aesthetics" value="Moderate">
+            <label>Moderate</label>
+          </li>
+          <li>
+            <input type="radio" name="Aesthetics" value="High">
+            <label>High</label>
+          </li>
+          <li>
+            <input type="radio" name="Aesthetics" value="Very High">
+            <label>Very High</label>
+          </li>
+        </ul>
+        <label for="Difficulty" class="statement"> Difficulty </label>
+        <ul id="Difficulty" class='likert'>
+          <li>
+            <input type="radio" name="Difficulty" value="Very Low">
+            <label>Very Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Difficulty" value="Low">
+            <label>Low</label>
+          </li>
+          <li>
+            <input type="radio" name="Difficulty" value="Moderate">
+            <label>Moderate</label>
+          </li>
+          <li>
+            <input type="radio" name="Difficulty" value="High">
+            <label>High</label>
+          </li>
+          <li>
+            <input type="radio" name="Difficulty" value="Very High">
+            <label>Very High</label>
+          </li>
+        </ul>
+        <div class="buttons">
+          <button class="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="introDiv" id="introDiv">
+      <div style="width: 75%; margin: auto;">
+        <h1 style="text-align: center"> Hello, and thank you very much for participating in this study </h1>
+        <h2>  The following is a brief introduction to what you will be doing in this study. You will play through twenty super mario levels. To complete a Super Mario level, simply move from left to right
+          until you touch the flagpole (not the rectangle it is standing on, jump into it). Make sure to avoid the Goombas (the mushroom looking guys).
+          You can jump into the yellow blocks with question marks on them to get rewards. You can either get a coin, which don't really help you, or you can get a mushroom. Touch the mushroom to grow larger.
+          When you are in this enlarged state you can touch a goomba without failing the level. Instead you will shrink and become invulnerable for a short time (indicated by Mario blinking).
+          Make sure to run (hold shift) when you can. This will cause you to jump further and faster (You also bounce further when you jump on goombas if you are running).
+          After the completion of each level you will be prompted to rate the level in three aspects: difficulty, enjoyment, and aesthetics.
+          Please take a moment to consider your ratings before leaving them. The data you create through your ratings
+          will be used to investigate the effectiveness of a level generator built using Artificial Intelligence, the levels you are playing through are generated by that generator. </h2>
+
+          <h2>
+            Please note that this site uses cookies to save your position and connect your level ratings to the background information you will be aksed to provide shortly. See our
+            <a href="../static/privacy-policy.html" target="_blank" style="color: blue; cursor: pointer"> privacy policy </a>.
+          </h2>
+        <h2>
+          That's all you need to know, click <a onclick="document.getElementById('introDiv').style.visibility = 'hidden'" style="color: blue; cursor: pointer"> here </a> to start!
+        </h2>
+      </div>
+    </div>
+  </body>
+</html>

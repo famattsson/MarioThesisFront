@@ -1,0 +1,176 @@
+html, body, ul, li {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  width: 40%;
+  height: 75%;
+  margin: 0 auto;
+  background-color: blue;
+}
+
+p {
+  text-align: center;
+  color: #e2f8ff;
+  font-size: 1vmax;
+}
+
+h1 {
+  font-size: 2vmax;
+  color: white;
+}
+
+h2 {
+  font-size: 1.5vmax;
+  color: white;
+}
+
+body {
+  overflow: scroll;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+.info {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: 30px;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  background: #0057e3;
+}
+
+.overlay {
+  z-index: 9;
+  margin: 30px;
+  background: #009938;
+}
+
+div.fadeMe {
+  visibility: hidden;
+  background-color: rgba(0,0,0,0.8);
+  width:      100%;
+  height:     100%;
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+}
+
+div.controls {
+  align-self: center;
+  alignment: center;
+  background-color: rgba(14,31,76,0.61);
+  width: 50%;
+  max-height: 15%;
+  padding: 5px;
+  border-radius: 15px;
+  margin: auto;
+  margin-top: 5px;
+}
+
+label {
+  font-size: 20px;
+  color: white;
+}
+
+html,body {padding:0;margin:0;}
+.wrap {
+  font:12px Arial, san-serif;
+}
+h1.likert-header {
+  padding-left:4.25%;
+  margin:20px 0 0;
+  font-size: 40px;
+}
+form .statement {
+  display:block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 30px 0 0 4.25%;
+  margin-bottom:10px;
+}
+form .likert {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  border-bottom:2px solid #efefef;
+}
+form .likert:last-of-type {border-bottom:0;}
+form .likert:before {
+  content: '';
+  position:relative;
+  top:11px;
+  left:9.5%;
+  display:block;
+  background-color:#efefef;
+  height:4px;
+  width:78%;
+}
+
+div.introDiv {
+  visibility: hidden;
+  margin: auto;
+  background-color: rgb(32,35,36);
+  width:      100%;
+  height:     100%;
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+}
+
+form .likert li {
+  display:inline-block;
+  width:19%;
+  text-align:center;
+  vertical-align: top;
+}
+form .likert li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+
+}
+form .likert li label {width:100%;}
+form .buttons {
+  margin:30px 0;
+  padding:0 4.25%;
+  text-align:right
+}
+form .buttons button {
+  padding: 5px 10px;
+  background-color: #67ab49;
+  border: 0;
+  border-radius: 3px;
+}
+
+form .buttons .clear {background-color: #e9e9e9;}
+form .buttons .submit {background-color: #67ab49;}
+form .buttons .clear:hover {background-color: #ccc;}
+form .buttons .submit:hover {background-color: #14892c;}
