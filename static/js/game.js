@@ -1,3 +1,8 @@
+var JUMP_KEY = 87
+var LEFT_KEY = 65
+var RIGHT_KEY = 68
+var DOWN_KEY = 83
+var RUN_KEY = 16
 
 var requestAnimFrame = (function(){
   return window.requestAnimationFrame       ||
@@ -9,6 +14,13 @@ var requestAnimFrame = (function(){
       window.setTimeout(callback, 1000 / 60);
     };
 })();
+
+var gameTime
+var menuActive
+var lastFrameTimeMs
+var maxFPS
+var delta
+var timestep
 
 //create the canvas
 var canvas = document.createElement("canvas");
@@ -28,11 +40,7 @@ canvas.height = 720;
 ctx.scale(3,3);
 document.body.appendChild(canvas);
 
-var JUMP_KEY = 87
-var LEFT_KEY = 65
-var RIGHT_KEY = 68
-var DOWN_KEY = 83
-var RUN_KEY = 16
+
 
 //viewport
 var vX = 0,
@@ -214,6 +222,15 @@ function initPlayer() {
 var backgroundInfoProvided = false;
 
 function init() {
+  JUMP_KEY = 87
+  LEFT_KEY = 65
+  RIGHT_KEY = 68
+  DOWN_KEY = 83
+  RUN_KEY = 16
+  lastFrameTimeMs = 0;
+  maxFPS = 60;
+  delta = 0;
+  timestep = 1000 / 60;
   music = {
     overworld: new Audio(pathPrefix+'sounds/aboveground_bgm.ogg'),
     underground: new Audio(pathPrefix+'sounds/underground_bgm.ogg'),
@@ -283,7 +300,7 @@ function init() {
 
   lastTime = Date.now();
 
-  main();
+  requestAnimationFrame(mainLoop)
 }
 
 function checkPlayer(players) {
@@ -296,26 +313,35 @@ function checkPlayer(players) {
   return false
 }
 
-var gameTime = 0;
-var menuActive = false
+
+
 
 //set up the game loop
-function main() {
-    var now = Date.now();
-    var dt = (now - lastTime) / 1000.0;
+function mainLoop(timestamp) {
+  // Throttle the frame rate.
+  let frameTime = lastFrameTimeMs + (1000/ maxFPS)
+  if (timestamp < frameTime) {
+    requestAnimationFrame(mainLoop);
+    return;
+  }
+  delta += timestamp - lastFrameTimeMs;
+  lastFrameTimeMs = timestamp;
 
-    update(dt);
-    render();
-
-    lastTime = now;
-    requestAnimFrame(main);
+  while (delta >= timestep) {
+    update(timestep/1000);
+    delta -= timestep;
+  }
+  render();
+  requestAnimationFrame(mainLoop);
 }
+
 
 function update(dt) {
   if (!menuActive) {
     if(currentLevelIndex !=  LevelsJson.length) {
       document.getElementById("CurrentLevelInfo").innerText = "Level Name: " + LevelsJson[currentLevelIndex].name + " | " + "Levels completed: " + (currentLevelIndex).toString() + " out of " + LevelsJson.length
     }
+
     gameTime += dt;
 
     handleInput(dt);
