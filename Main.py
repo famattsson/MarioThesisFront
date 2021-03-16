@@ -1,16 +1,21 @@
 import datetime
+import random
+from flaskext.autoversion import Autoversion
 
-from flask import Flask, current_app
+from flask import Flask, render_template
 
 app = Flask(__name__)
+app.autoversion = True
+Autoversion(app)
 
+buildid = random.randint(0, 1000000)
 
 @app.route('/')
 def root():
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
 
-    return current_app.send_static_file("index_new.html")
+    return render_template("index_new.html")
 
 
 #192.168.1.135
@@ -23,4 +28,4 @@ if __name__ == '__main__':
     # the "static" directory. See:
     # http://flask.pocoo.org/docs/1.0/quickstart/#static-files. Once deployed,
     # App Engine itself will serve those files as configured in app.yaml.
-    app.run(host='192.168.1.135', port=14545, debug=True)
+    app.run(host='127.0.0.1', port=14545, debug=True)

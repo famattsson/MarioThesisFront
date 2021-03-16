@@ -7,7 +7,7 @@ var RUN_KEY = 16
 var gameTime
 var menuActive
 var lastFrameTimeMs
-var maxFPS
+var maxFPS = 60
 var delta
 var timestep
 
@@ -83,6 +83,7 @@ function startKeyRebind(keyLabel) {
   currentConfigKeyChoice = keyLabel
   configkeyFunc = function(e) { configureKey(e, keyLabel) }
   document.addEventListener('keydown', configkeyFunc, true)
+  document.getElementById('rebindWaitDiv').style.visibility = "Visible"
 }
 
 function configureKey (e) {
@@ -112,7 +113,23 @@ function configureKey (e) {
         break
     }
   }
+  document.getElementById('rebindWaitDiv').style.visibility = "Hidden"
   document.removeEventListener('keydown', configkeyFunc, true)
+  saveKeys()
+}
+
+function saveKeys() {
+  let controlsString = LEFT_KEY + "," + RIGHT_KEY + "," + JUMP_KEY + "," + RUN_KEY
+  setCookie("Controls", controlsString, 365)
+}
+
+function loadKeys() {
+  controlsString = getCookie("Controls")
+  savedControls = controlsString.split(",")
+  LEFT_KEY = savedControls[0]
+  RIGHT_KEY = savedControls[1]
+  JUMP_KEY = savedControls[2]
+  RUN_KEY = savedControls[3]
 }
 
 function processQualityForm(e) {
@@ -262,11 +279,15 @@ function initPlayer() {
 var backgroundInfoProvided = false;
 
 function init() {
-  JUMP_KEY = "W"
-  LEFT_KEY = "A"
-  RIGHT_KEY = "D"
   DOWN_KEY = "S"
-  RUN_KEY = "Shift"
+  if (getCookie("Controls") == "") {
+    JUMP_KEY = "W"
+    LEFT_KEY = "A"
+    RIGHT_KEY = "D"
+    RUN_KEY = "ShiftLeft"
+  } else {
+    loadKeys()
+  }
   lastFrameTimeMs = 0;
   maxFPS = 60;
   delta = 0;
@@ -372,6 +393,7 @@ function checkPlayer(players) {
 //set up the game loop
 function mainLoop(timestamp) {
   // Throttle the frame rate.
+  maxFPS = 60
   let frameTime = lastFrameTimeMs + (1000/ maxFPS)
   if (timestamp < frameTime) {
     requestAnimationFrame(mainLoop);

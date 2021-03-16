@@ -178,6 +178,17 @@ form .buttons {
   padding:0 4.25%;
   text-align:right
 }
+
+button.rebind {
+  margin:30px 10px;
+  padding:0 2%;
+
+  width: 8%;
+  height: 4%;
+
+
+}
+
 form .buttons button {
   padding: 5px 10px;
   background-color: #67ab49;
