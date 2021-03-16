@@ -203,6 +203,6 @@ var nextlevel = Mario.nextlevel = function() {
         .catch(error => console.log('error', error));
 
   music.underground.pause();
-  // music.overworld.currentTime = 0;
+  music.overworld.currentTime = 0;
   music.overworld.play();
 };

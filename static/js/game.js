@@ -309,8 +309,14 @@ function init() {
     overworld: new Audio(pathPrefix+'sounds/aboveground_bgm.ogg'),
     underground: new Audio(pathPrefix+'sounds/underground_bgm.ogg'),
     clear: new Audio(pathPrefix+'sounds/stage_clear.wav'),
-    death: new Audio(pathPrefix+'sounds/mariodie.wav')
+    death: new Audio(pathPrefix+'sounds/mariodie.wav'),
   };
+
+music.clear.volume=0.2
+music.underground.volume=0.2
+music.overworld.volume=0.2
+music.death.volume=0.2
+
   sounds = {
     smallJump: new Audio(pathPrefix+'sounds/jump-small.wav'),
     bigJump: new Audio(pathPrefix+'sounds/jump-super.wav'),
@@ -325,6 +331,21 @@ function init() {
     powerup: new Audio(pathPrefix+'sounds/powerup.wav'),
     stomp: new Audio(pathPrefix+'sounds/stomp.wav')
   };
+
+  sounds.smallJump.volume=0.6
+  sounds.bigJump.volume=0.6
+  sounds.breakBlock.volume=0.6
+  sounds.bump.volume=0.6
+  sounds.coin.volume=0.6
+  sounds.fireball.volume=0.6
+  sounds.flagpole.volume=0.6
+  sounds.kick.volume=0.6
+  sounds.pipe.volume=0.6
+  sounds.itemAppear.volume=0.6
+  sounds.powerup.volume=0.6
+  sounds.stomp.volume=0.6
+
+
   if(getCookie("UUID") == "") {
     shuffleArray(LevelsJson)
     setCookie("LevelsOrder", getLevelOrder(), 365)
