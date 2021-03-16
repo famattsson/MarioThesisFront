@@ -4,17 +4,6 @@ var RIGHT_KEY = 68
 var DOWN_KEY = 83
 var RUN_KEY = 16
 
-var requestAnimFrame = (function(){
-  return window.requestAnimationFrame       ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame    ||
-    window.oRequestAnimationFrame      ||
-    window.msRequestAnimationFrame     ||
-    function(callback){
-      window.setTimeout(callback, 1000 / 60);
-    };
-})();
-
 var gameTime
 var menuActive
 var lastFrameTimeMs
@@ -40,7 +29,19 @@ canvas.height = 720;
 ctx.scale(3,3);
 document.body.appendChild(canvas);
 
+var keysConfiging = false
 
+function viewKeyConfig () {
+  keysConfiging = true
+  document.getElementById("controlConfigDiv").style.visibility = "VISIBLE"
+  menuActive = true
+}
+
+function hideKeyConfig () {
+  keysConfiging = false
+  document.getElementById("controlConfigDiv").style.visibility = "HIDDEN"
+  menuActive = false
+}
 
 //viewport
 var vX = 0,
@@ -73,6 +74,45 @@ function shuffleArray(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+var configkeyFunc
+var currentConfigKeyChoice
+
+function startKeyRebind(keyLabel) {
+  currentConfigKeyChoice = keyLabel
+  configkeyFunc = function(e) { configureKey(e, keyLabel) }
+  document.addEventListener('keydown', configkeyFunc, true)
+}
+
+function configureKey (e) {
+  if(keysConfiging) {
+    switch (currentConfigKeyChoice) {
+      case 'Left':
+        LEFT_KEY = e.code.replace("Key","")
+        document.getElementById("LeftKeyLabel").innerText = "left: " + LEFT_KEY + " | "
+        document.getElementById("LeftKeyButton").innerText = LEFT_KEY
+        break
+      case 'Right':
+        RIGHT_KEY = e.code.replace("Key","")
+        document.getElementById("RightKeyLabel").innerText = "Right: " + RIGHT_KEY + " | "
+        document.getElementById("RightKeyButton").innerText = RIGHT_KEY
+        break
+      case 'Jump':
+        JUMP_KEY = e.code.replace("Key","")
+        document.getElementById("JumpKeyLabel").innerText = "Jump: " + JUMP_KEY + " | "
+        document.getElementById("JumpKeyButton").innerText = JUMP_KEY
+        break
+      case 'Run':
+        RUN_KEY = e.code.replace("Key","")
+        document.getElementById("RunKeyLabel").innerText = "Run: " + RUN_KEY
+        document.getElementById("RunKeyButton").innerText = RUN_KEY
+        break
+      default:
+        break
+    }
+  }
+  document.removeEventListener('keydown', configkeyFunc, true)
 }
 
 function processQualityForm(e) {
@@ -222,15 +262,28 @@ function initPlayer() {
 var backgroundInfoProvided = false;
 
 function init() {
-  JUMP_KEY = 87
-  LEFT_KEY = 65
-  RIGHT_KEY = 68
-  DOWN_KEY = 83
-  RUN_KEY = 16
+  JUMP_KEY = "W"
+  LEFT_KEY = "A"
+  RIGHT_KEY = "D"
+  DOWN_KEY = "S"
+  RUN_KEY = "Shift"
   lastFrameTimeMs = 0;
   maxFPS = 60;
   delta = 0;
   timestep = 1000 / 60;
+
+  document.getElementById("LeftKeyLabel").innerText = "left: " + LEFT_KEY + " | "
+  document.getElementById("LeftKeyButton").innerText = LEFT_KEY
+
+  document.getElementById("RightKeyLabel").innerText = "Right: " + RIGHT_KEY + " | "
+  document.getElementById("RightKeyButton").innerText = RIGHT_KEY
+
+  document.getElementById("JumpKeyLabel").innerText = "Jump: " + JUMP_KEY + " | "
+  document.getElementById("JumpKeyButton").innerText = JUMP_KEY
+
+  document.getElementById("RunKeyLabel").innerText = "Run: " + RUN_KEY
+  document.getElementById("RunKeyButton").innerText = RUN_KEY
+
   music = {
     overworld: new Audio(pathPrefix+'sounds/aboveground_bgm.ogg'),
     underground: new Audio(pathPrefix+'sounds/underground_bgm.ogg'),

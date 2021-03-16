@@ -61,6 +61,10 @@ html {
   background: #0057e3;
 }
 
+p.controls {
+  display: inline;
+}
+
 .overlay {
   z-index: 9;
   margin: 30px;
@@ -68,6 +72,17 @@ html {
 }
 
 div.fadeMe {
+  visibility: hidden;
+  background-color: rgba(0,0,0,0.8);
+  width:      100%;
+  height:     100%;
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+}
+
+div.controlConfigDiv {
   visibility: hidden;
   background-color: rgba(0,0,0,0.8);
   width:      100%;

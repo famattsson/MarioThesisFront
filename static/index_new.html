@@ -39,8 +39,9 @@
     <script type="text/javascript" src="../static/js/levels/levelparser.js?v=1.0"></script>
     <script type="text/javascript" src="../static/js/game.js?v=1.0"></script>
     <div class="controls" style="align-content: center; text-align: center;">
-      <h2> Controls </h2>
-      <p class="controls">Move Left: A, Move Right: D, Jump: W, Run: Shift (hold)</p>
+      <h2> Controls (<a onclick="viewKeyConfig()" style="color: blue; cursor: pointer"> REBIND </a>)</h2>
+      <p class="controls" id="LeftKeyLabel"> </p> <p class="controls" id="RightKeyLabel"> </p>
+      <p class="controls" id="JumpKeyLabel"> </p>  <p class="controls" id="RunKeyLabel" > </p>
     </div>
     <div id="EndDiv" class="fadeMe" style="text-align: center">
       <h1> Thank you for participating! </h1>
@@ -190,6 +191,25 @@
         <h2>
           That's all you need to know, click <a onclick="document.getElementById('introDiv').style.visibility = 'hidden'" style="color: blue; cursor: pointer"> here </a> to start!
         </h2>
+      </div>
+    </div>
+    <div class = "controlConfigDiv" id = "controlConfigDiv">
+      <div style="width: 75%; height: 75%; margin: auto">
+        <ul style="margin: auto;">
+          <li>
+            <label> Left </label> <button class="buttons" onclick="startKeyRebind('Left')" id="LeftKeyButton"> </button>
+          </li>
+          <li>
+            <label> Right </label> <button class="buttons" onclick="startKeyRebind('Right')" id="RightKeyButton"> </button>
+          </li>
+          <li>
+            <label> Jump </label> <button class="buttons" onclick="startKeyRebind('Jump')" id="JumpKeyButton"> </button>
+          </li>
+          <li>
+            <label> Run </label> <button class="buttons" onclick="startKeyRebind('Run')" id="RunKeyButton"> </button>
+          </li>
+        </ul>
+        <button class="buttons" onclick="hideKeyConfig()"> Close </button>
       </div>
     </div>
   </body>

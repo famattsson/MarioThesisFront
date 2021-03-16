@@ -2,7 +2,7 @@
     var pressedKeys = {};
 
     function setKey(event, status) {
-        var code = event.keyCode;
+        var code = event.code.replace("Key","");
         var key;
 
         switch(code) {
