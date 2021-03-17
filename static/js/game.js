@@ -65,6 +65,7 @@ var sounds;
 var music;
 //initializeg
 var lastTime;
+var activeRebindButton = 0;
 var currentLevelIndex = 0;
 var prevLevelIndex = 0;
 var currentLevelType;
@@ -79,7 +80,9 @@ function shuffleArray(array) {
 var configkeyFunc
 var currentConfigKeyChoice
 
-function startKeyRebind(keyLabel) {
+function startKeyRebind(buttonId,keyLabel) {
+  activeRebindButton = document.getElementById(buttonId)
+  activeRebindButton.disabled = true
   currentConfigKeyChoice = keyLabel
   configkeyFunc = function(e) { configureKey(e, keyLabel) }
   document.addEventListener('keydown', configkeyFunc, true)
@@ -116,6 +119,7 @@ function configureKey (e) {
   document.getElementById('rebindWaitDiv').style.visibility = "Hidden"
   document.removeEventListener('keydown', configkeyFunc, true)
   saveKeys()
+  activeRebindButton.disabled = false
 }
 
 function saveKeys() {
